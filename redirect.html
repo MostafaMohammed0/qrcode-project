@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Redirect Page</h1>
+        <p>You are being redirected to: <a id="redirect-link" href="#" target="_blank">Click here</a></p>
+    </div>
+
+    <script>
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const encodedFakeUrl = urlParams.get('fake');
+        const encodedRealUrl = urlParams.get('real');
+
+        if (encodedFakeUrl && encodedRealUrl) {
+            
+            const fakeUrl = atob(encodedFakeUrl); 
+            const realUrl = atob(encodedRealUrl); 
+
+            
+            const redirectLink = document.getElementById('redirect-link');
+            redirectLink.href = realUrl;
+            redirectLink.textContent = fakeUrl;
+        } else {
+            document.querySelector('.container').innerHTML = '<p>Invalid URL parameters.</p>';
+        }
+    </script>
+</body>
+</html>
